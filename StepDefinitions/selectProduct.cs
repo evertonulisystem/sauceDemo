@@ -13,6 +13,7 @@ namespace MyNamespace
     {
        // private readonly ScenarioContext _scenarioContext;
         private IWebDriver driver; // objeto do Selenium
+   
 
         public StepDefinitions(ScenarioContext scenarioContext)
         {
@@ -76,7 +77,10 @@ namespace MyNamespace
         {
            //Thread.Sleep(4000); funciona mas o ideal é o de baixo
            //Espera explicita
-           new WebDriverWait (driver, TimeSpan.FromMilliseconds(3000)).Until(Expec)
+           //new WebDriverWait (driver, TimeSpan.FromMilliseconds(3000)).Until(Expec)
+           WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(6000));
+           //variavelDoTempo seria um nome qualquer para representar o Until
+           wait.Until(variavelDoTempo => driver.FindElement(By.CssSelector("span.title")).Displayed);
 
            Assert.That(driver.FindElement(By.CssSelector("span.title")).Text, Is.EqualTo(title)); 
            //Assert.That(driver.FindElement(By.XPath("//*[@id="header_container"]/div[2]/span")).Text, Is.EqualTo(title));
